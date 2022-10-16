@@ -24,14 +24,6 @@ class Addproduct extends React.Component {
     }
   }
 
-  isValidEmail(email) {
-    return /\S+@\S+\.\S+/.test(email);
-  }
-
-  isValidPhone(phoneNumber) {
-    return /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/i.test(phoneNumber);
-  }
-
   Addproduct = () => {
 
     if (this.state.FirstName == "" || this.state.LastName == "" || this.state.Address == "" || this.state.City == "" || this.state.State == "" || this.state.Phone == "" || this.state.name == "" ||
@@ -47,14 +39,6 @@ class Addproduct extends React.Component {
       alert("LastName should be  minimum 3 and 25 length");
     }
 
-    else if (!this.isValidEmail(this.state.Email)) {
-      alert("Please enter the correct email");
-    }
-
-    else if (!this.isValidPhone(this.state.Phone)) {
-      alert("Please enter valid phone number");
-    }
-
     else {
       axios.post('https://e-auction-sellerapi.azurewebsites.net/e-auction/api/v1/seller/add-product',
         {
@@ -65,6 +49,7 @@ class Addproduct extends React.Component {
           state: this.state.Status,
           pin: parseInt(this.state.Pin),
           phone: this.state.Phone,
+          email:this.state.Email,
           name: this.state.ProductName,
           shortDescription: this.state.ShortDescription,
           detailedDescription: this.state.DetailedDescription,
@@ -74,17 +59,18 @@ class Addproduct extends React.Component {
         })
         .then(json => {
           if (json.status = 200) {
-            console.log(json.Status);
             alert("Product Save Successfully");
+            window.location.reload();
           }
           else {
             alert('Data not Saved');
           }
         }).catch(err => {
-          alert(err.response.data);
+          alert(err.response);
         })
     }
   }
+  
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -122,7 +108,7 @@ class Addproduct extends React.Component {
             <FormGroup row>
               <Label for="State" sm={2}>State</Label>
               <Col sm={10}>
-                <Input type="text" name="State" onChange={this.handleChange} value={this.state.state} placeholder="Enter State" />
+                <Input type="text" name="State" onChange={this.handleChange} value={this.state.State} placeholder="Enter State" />
               </Col>
             </FormGroup>
             <FormGroup row>
@@ -135,6 +121,12 @@ class Addproduct extends React.Component {
               <Label for="Phone" sm={2}>Phone</Label>
               <Col sm={10}>
                 <Input type="text" name="Phone" onChange={this.handleChange} value={this.state.Phone} min="1" max="10" placeholder="Enter Phone" />
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Label for="Email" sm={2}>Email</Label>
+              <Col sm={10}>
+                <Input type="text" name="Email" onChange={this.handleChange} value={this.state.Email} placeholder="Enter Email" />
               </Col>
             </FormGroup>
           </Col>

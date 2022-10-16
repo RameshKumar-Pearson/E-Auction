@@ -1,6 +1,6 @@
 import React from 'react';
 import './Addproduct.css';
-import { Container, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { Container, Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import Table from './Table';  
 
 export const Productlist = (props) => (
