@@ -1,7 +1,7 @@
 import React from 'react';
 import './Addproduct.css';
 import { Container, Col, Form, FormGroup, Label, Input } from 'reactstrap';
-import Table from './Table';  
+import Table from './Table';
 
 export const Productlist = (props) => (
   <div className="form-group">
@@ -31,35 +31,35 @@ export default class FetchProductDetails extends React.Component {
       value: '',
       name: '',
       BidEndDate: '',
-      Category:'',
-      DetailedDescription:'',
-      ProductName:'',
-      ShortDescription:'',
-      StartingPrice:'',
-      Bids:[]
+      Category: '',
+      DetailedDescription: '',
+      ProductName: '',
+      ShortDescription: '',
+      StartingPrice: '',
+      Bids: []
     }
   }
 
-  tabRow(){  
-    return this.state.Bids.map(function(object, i){  
-        return <Table obj={object} key={i} />;  
-    });  
-  }  
+  tabRow() {
+    return this.state.Bids.map(function (object, i) {
+      return <Table obj={object} key={i} />;
+    });
+  }
 
-  getProductDetails= () => {  
-      fetch(`https://e-auction-sellerapi.azurewebsites.net/e-auction/api/v1/seller/show-bids/${this.state.product}`)  
+  getProductDetails = () => {
+    fetch(`https://e-auction-sellerapi.azurewebsites.net/e-auction/api/v1/seller/show-bids/${this.state.product}`)
       .then((response) => response.json())
-      .then((res) => this.setState({ 
+      .then((res) => this.setState({
         ProductName: res.name,
         ShortDescription: res.shortDescription,
         DetailedDescription: res.detailedDescription,
         Category: res.category,
         StartingPrice: res.startingPrice,
         BidEndDate: res.bidEndData,
-        Bids : res.bids
+        Bids: res.bids
       }))
-    }
- 
+  }
+
   componentDidMount() {
     fetch('https://e-auction-sellerapi.azurewebsites.net/e-auction/api/v1/seller/products')
       .then((response) => response.json())
@@ -84,12 +84,12 @@ export default class FetchProductDetails extends React.Component {
                 options={this.state.collection}
                 onChange={this.onChange} />
               <div className="form-group" style={{ paddingRight: '527px' }}>
-                <button type="button" className="btn" onClick={this.getProductDetails} style={{ backgroundColor: 'grey' } } >Fetch Details</button>
+                <button type="button" className="btn" onClick={this.getProductDetails} style={{ backgroundColor: 'grey' }} >Fetch Details</button>
               </div>
             </Col>
           </FormGroup>
           <div id='details'>
-          <FormGroup row>
+            <FormGroup row>
               <Label for="ProductName" sm={2}>Name</Label>
               <Col sm={4}>
                 <Input type="text" name="Name" value={this.state.ProductName} />
@@ -125,23 +125,23 @@ export default class FetchProductDetails extends React.Component {
                 <Input type="text" name="BidEndDate" value={this.state.BidEndDate} />
               </Col>
             </FormGroup>
-            </div>  
-          <div id='bidDetails'>  
-          <h4 align="center">Bids</h4>  
-          <table className="table table-striped" style={{ marginTop: 5 }}>  
-            <thead>  
-              <tr>  
-                <th>Name</th>  
-                <th>BidAmount</th>  
-                <th>Email</th>  
-                <th>MobileNumber</th> 
-              </tr>  
-            </thead>  
-            <tbody>  
-             { this.tabRow() }   
-            </tbody>  
-          </table>  
-        </div>  
+          </div>
+          <div id='bidDetails'>
+            <h4 align="center">Bids</h4>
+            <table className="table table-striped" style={{ marginTop: 5 }}>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>BidAmount</th>
+                  <th>Email</th>
+                  <th>MobileNumber</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.tabRow()}
+              </tbody>
+            </table>
+          </div>
         </Col>
       </Container>
     )
