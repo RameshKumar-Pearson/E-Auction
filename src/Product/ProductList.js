@@ -84,8 +84,8 @@ export default class FetchProductDetails extends React.Component {
                 options={this.state.collection}
                 onChange={this.onChange} />
               <div className="form-group" style={{ paddingRight: '527px' }}>
-                <button type="button" className="btn" onClick={this.getProductDetails} style={{ backgroundColor: 'grey' }} >Fetch Details</button>
-              </div>
+                <button type="button" className="btn" onClick={this.getProductDetails} style={{ backgroundColor: 'grey', flexDirection: 'row', justifyContent: 'space-between' }} >Fetch Details</button>
+               </div>          
             </Col>
           </FormGroup>
           <div id='details'>

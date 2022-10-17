@@ -54,7 +54,7 @@ class Addproduct extends React.Component {
           shortDescription: this.state.ShortDescription,
           detailedDescription: this.state.DetailedDescription,
           category: this.state.Category,
-          startingPrice: this.state.StartingPrice,
+          startingPrice: parseInt(this.state.StartingPrice),
           bidEndDate: this.state.BidEndDate
         })
         .then(json => {
@@ -66,7 +66,7 @@ class Addproduct extends React.Component {
             alert('Data not Saved');
           }
         }).catch(err => {
-          alert(err.response);
+          alert(err.response.data);
         })
     }
   }
