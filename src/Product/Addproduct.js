@@ -26,8 +26,8 @@ class Addproduct extends React.Component {
 
   Addproduct = () => {
 
-    if (this.state.FirstName == "" || this.state.LastName == "" || this.state.Address == "" || this.state.City == "" || this.state.State == "" || this.state.Phone == "" || this.state.name == "" ||
-      this.state.ShortDescription == "" || this.state.DetailedDescription == "" || this.state.Category == "" || this.state.StartingPrice == "" || this.state.BidEndDate == "") {
+    if (this.state.FirstName === "" || this.state.LastName === "" || this.state.Address === "" || this.state.City === "" || this.state.State === "" || this.state.Phone === "" || this.state.name === "" ||
+      this.state.ShortDescription === "" || this.state.DetailedDescription === "" || this.state.Category === "" || this.state.StartingPrice ==="" || this.state.BidEndDate === "") {
       alert("Please enter all the details")
     }
 
