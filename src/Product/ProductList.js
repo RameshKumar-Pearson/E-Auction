@@ -47,7 +47,7 @@ export default class FetchProductDetails extends React.Component {
   }
 
   getProductDetails = () => {
-    fetch(`https://e-auction-sellerapi.azurewebsites.net/e-auction/api/v1/seller/show-bids/${this.state.product}`)
+    fetch(`https://e-auction-api-gate-way.azurewebsites.net/apigateway/e-auction/api/v1/seller/show-bids/${this.state.product}`)
       .then((response) => response.json())
       .then((res) => this.setState({
         ProductName: res.name,
@@ -61,7 +61,7 @@ export default class FetchProductDetails extends React.Component {
   }
 
   componentDidMount() {
-    fetch('https://e-auction-sellerapi.azurewebsites.net/e-auction/api/v1/seller/products')
+    fetch('https://e-auction-api-gate-way.azurewebsites.net/apigateway/e-auction/api/v1/seller/products')
       .then((response) => response.json())
       .then((res) => this.setState({ collection: res }))
   }

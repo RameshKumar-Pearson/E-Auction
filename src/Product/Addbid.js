@@ -42,7 +42,7 @@ class Addbid extends React.Component {
     }
 
     componentDidMount() {
-        fetch('https://e-auction-sellerapi.azurewebsites.net/e-auction/api/v1/seller/products')
+        fetch('https://e-auction-api-gate-way.azurewebsites.net/apigateway/e-auction/api/v1/seller/products')
             .then((response) => response.json())
             .then((res) => this.setState({ collection: res }))
     }
@@ -54,7 +54,7 @@ class Addbid extends React.Component {
 
     Addbid = () => {
 
-            axios.post('https://e-auction-buyerapi.azurewebsites.net/e-auction/api/v1/buyer/place-bid',
+            axios.post('https://e-auction-api-gate-way.azurewebsites.net/apigateway/e-auction/api/v1/buyer/place-bid',
                 {
                     firstName: this.state.FirstName,
                     lastName: this.state.LastName,

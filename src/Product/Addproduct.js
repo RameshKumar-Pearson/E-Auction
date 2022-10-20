@@ -40,7 +40,7 @@ class Addproduct extends React.Component {
     }
 
     else {
-      axios.post('https://e-auction-sellerapi.azurewebsites.net/e-auction/api/v1/seller/add-product',
+      axios.post('https://e-auction-api-gate-way.azurewebsites.net/apigateway/e-auction/api/v1/seller/add-product',
         {
           firstName: this.state.FirstName,
           lastName: this.state.LastName,

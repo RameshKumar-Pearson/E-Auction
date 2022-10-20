@@ -33,13 +33,13 @@ export default class FetchProductDetails extends React.Component {
     }
 
     componentDidMount() {
-        fetch('https://e-auction-sellerapi.azurewebsites.net/e-auction/api/v1/seller/products')
+        fetch('https://e-auction-api-gate-way.azurewebsites.net/apigateway/e-auction/api/v1/seller/products')
             .then((response) => response.json())
             .then((res) => this.setState({ collection: res }))
     }
 
     DeleteProduct = () => {
-        axios.delete(`https://e-auction-sellerapi.azurewebsites.net/e-auction/api/v1/seller/delete/${this.state.product}`)
+        axios.delete(`https://e-auction-api-gate-way.azurewebsites.net/apigateway/e-auction/api/v1/seller/delete/${this.state.product}`)
             .then(json => {
                 if (json.status = 200) {
                     alert("Product Delete Successfully");
