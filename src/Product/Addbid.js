@@ -2,6 +2,11 @@ import axios from 'axios';
 import React from 'react';
 import { Button, Col, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import './Addproduct.css';
+var phoneNumberValidation = new RegExp(/^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/i);
+var emailValidation = new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i);
+var intValidation = new RegExp(/^[0-9\b]+$/);
+
+let Isvalid;
 
 export const Productlist = (props) => (
     <div className="form-group">
@@ -21,6 +26,7 @@ export const Productlist = (props) => (
 )
 
 class Addbid extends React.Component {
+
     constructor(props) {
         super(props)
         this.state = {
@@ -49,11 +55,64 @@ class Addbid extends React.Component {
 
     onChange = (event) => {
         this.state.ProductId = event.target.value;
+        this.state.ProductName = event.target.name;
         console.info(this.state.ProductId);
+        console.info(this.state.ProductName);
     }
 
     Addbid = () => {
+        debugger;
 
+        if (this.state.FirstName === "" || this.state.LastName === "" || this.state.Address === "" || this.state.City === "" || this.state.Pin === "" || this.state.Phone === "" || this.state.Email === "" || this.state.ProductId === "" || this.state.BidAmount === "") {
+            alert("Please enter all the details");
+            Isvalid = false;
+        }
+
+        else if (this.state.FirstName.length < 5 || this.state.FirstName.length > 30) {
+            alert("FirstName should be minimum 5 and maximum 30 length");
+            Isvalid = false;
+        }
+
+        else if (this.state.LastName.length < 3 || this.state.LastName.length > 25) {
+            alert("LastName should be  minimum 3 and 25 length");
+            Isvalid = false;
+        }
+
+        else if (!intValidation.test(this.state.BidAmount)) {
+            alert("Incorrect bid amount");
+            Isvalid = false;
+        }
+
+        else if (!intValidation.test(this.state.Pin)) {
+            alert("Incorrect pin");
+            Isvalid = false;
+        }
+
+        else if (this.state.Phone.length > 10) {
+            alert("Incorrect phone number");
+            Isvalid = false;
+        }
+
+        else if (!phoneNumberValidation.test(this.state.Phone)) {
+            alert("Incorrect phone number");
+            Isvalid = false;
+        }
+
+        else if (!emailValidation.test(this.state.Email)) {
+            alert("Incorrect email");
+            Isvalid = false;
+        }
+
+        else if (this.state.ProductName.length < 5 || this.state.ProductName.length > 30) {
+            alert("Product Name Should Have Minimum Length 5 and Maximum Length 30");
+            Isvalid = false;
+        }
+
+        else {
+            Isvalid = true;
+        }
+
+        if (Isvalid) {
             axios.post('https://e-auction-api-gate-way.azurewebsites.net/apigateway/e-auction/api/v1/buyer/place-bid',
                 {
                     firstName: this.state.FirstName,
@@ -70,7 +129,7 @@ class Addbid extends React.Component {
                 .then(json => {
                     if (json.status = 200) {
                         alert("Adding bid to the product completed");
-                        window.location.reload();
+                        window.location.href = 'https://e-auction-web-app.azurewebsites.net/';
                     }
                     else {
                         alert('Error occurred while adding the bid to the product');
@@ -78,6 +137,7 @@ class Addbid extends React.Component {
                 }).catch(err => {
                     alert(err.response.data);
                 })
+        }
     }
 
     handleChange = (e) => {

@@ -43,14 +43,15 @@ export default class FetchProductDetails extends React.Component {
             .then(json => {
                 if (json.status = 200) {
                     alert("Product Delete Successfully");
-                    window.location.reload();
-                  }
+                    window.location.href = 'https://e-auction-web-app.azurewebsites.net/';
+                }
+            }).catch(err => {
+                alert(err.response.data);
             })
     }
 
     onChange = (event) => {
         this.state.product = event.target.value;
-        console.info(this.state.product);
     }
 
     render() {

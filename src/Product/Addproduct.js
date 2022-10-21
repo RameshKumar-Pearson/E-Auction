@@ -3,6 +3,12 @@ import React from 'react';
 import { Button, Col, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import './Addproduct.css';
 
+var phoneNumberValidation = new RegExp(/^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/i);
+var emailValidation = new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i);
+var intValidation = new RegExp(/^[0-9\b]+$/);
+
+let Isvalid;
+
 class Addproduct extends React.Component {
   constructor(props) {
     super(props)
@@ -27,19 +33,51 @@ class Addproduct extends React.Component {
   Addproduct = () => {
 
     if (this.state.FirstName === "" || this.state.LastName === "" || this.state.Address === "" || this.state.City === "" || this.state.State === "" || this.state.Phone === "" || this.state.name === "" ||
-      this.state.ShortDescription === "" || this.state.DetailedDescription === "" || this.state.Category === "" || this.state.StartingPrice ==="" || this.state.BidEndDate === "") {
-      alert("Please enter all the details")
+      this.state.ShortDescription === "" || this.state.DetailedDescription === "" || this.state.Category === "" || this.state.StartingPrice === "" || this.state.BidEndDate === "") {
+      alert("Please enter all the details");
+      Isvalid = false;
     }
 
     else if (this.state.FirstName.length < 5 || this.state.FirstName.length > 30) {
       alert("FirstName should be minimum 5 and maximum 30 length");
+      Isvalid = false;
     }
 
     else if (this.state.LastName.length < 3 || this.state.LastName.length > 25) {
       alert("LastName should be  minimum 3 and 25 length");
+      Isvalid = false;
+    }
+
+    else if (this.state.Phone.length > 10) {
+      alert("Incorrect phone number");
+      Isvalid = false;
+    }
+
+    else if (!phoneNumberValidation.test(this.state.Phone)) {
+      alert("Incorrect phone number");
+      Isvalid = false;
+    }
+
+    else if (!intValidation.test(this.state.Pin)) {
+      alert("Incorrect pin");
+      Isvalid = false;
+    }
+
+    else if (!emailValidation.test(this.state.Email)) {
+      alert("Incorrect email");
+      Isvalid = false;
+    }
+
+    else if (this.state.ProductName.length < 5 || this.state.ProductName.length > 30) {
+      alert("Product Name Should Have Minimum Length 5 and Maximum Length 30");
+      Isvalid = false;
     }
 
     else {
+      Isvalid = true;
+    }
+
+    if (Isvalid) {
       axios.post('https://e-auction-api-gate-way.azurewebsites.net/apigateway/e-auction/api/v1/seller/add-product',
         {
           firstName: this.state.FirstName,
@@ -49,7 +87,7 @@ class Addproduct extends React.Component {
           state: this.state.Status,
           pin: parseInt(this.state.Pin),
           phone: this.state.Phone,
-          email:this.state.Email,
+          email: this.state.Email,
           name: this.state.ProductName,
           shortDescription: this.state.ShortDescription,
           detailedDescription: this.state.DetailedDescription,
@@ -60,7 +98,7 @@ class Addproduct extends React.Component {
         .then(json => {
           if (json.status = 200) {
             alert("Product Save Successfully");
-            window.location.reload();
+            window.location.replace('https://e-auction-web-app.azurewebsites.net/');
           }
           else {
             alert('Data not Saved');
@@ -70,7 +108,7 @@ class Addproduct extends React.Component {
         })
     }
   }
-  
+
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
