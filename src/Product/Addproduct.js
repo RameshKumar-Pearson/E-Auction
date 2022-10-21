@@ -12,7 +12,7 @@ class Addproduct extends React.Component {
       Address: '',
       City: '',
       State: '',
-      Pin: 0,
+      Pin: '',
       Phone: '',
       Email: '',
       ProductName: '',

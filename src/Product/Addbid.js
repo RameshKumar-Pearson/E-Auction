@@ -69,11 +69,11 @@ class Addbid extends React.Component {
                 })
                 .then(json => {
                     if (json.status = 200) {
-                        alert("Product Save Successfully");
+                        alert("Adding bid to the product completed");
                         window.location.reload();
                     }
                     else {
-                        alert('Data not Saved');
+                        alert('Error occurred while adding the bid to the product');
                     }
                 }).catch(err => {
                     alert(err.response.data);
