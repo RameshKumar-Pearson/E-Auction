@@ -26,15 +26,26 @@ class Addproduct extends React.Component {
       DetailedDescription: '',
       Category: '',
       StartingPrice: '',
-      BidEndDate: ''
+      BidEndDate: '',
+      categoryOptions: [
+        { key: '0', value: 'Select Category' },
+        { key: '1', value: 'Painting' },
+        { key: '2', value: 'Sculptor' },
+        { key: '3', value: 'Ornament' }
+      ]
     }
   }
 
   Addproduct = () => {
 
     if (this.state.FirstName === "" || this.state.LastName === "" || this.state.Address === "" || this.state.City === "" || this.state.State === "" || this.state.Phone === "" || this.state.name === "" ||
-      this.state.ShortDescription === "" || this.state.DetailedDescription === "" || this.state.Category === "" || this.state.StartingPrice === "" || this.state.BidEndDate === "") {
+      this.state.ShortDescription === "" || this.state.DetailedDescription === "" || this.state.StartingPrice === "" || this.state.BidEndDate === "") {
       alert("Please enter all the details");
+      Isvalid = false;
+    }
+
+    else if (this.state.Category === 'Select Category') {
+      alert("Incorrect Category");
       Isvalid = false;
     }
 
@@ -113,6 +124,14 @@ class Addproduct extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  categoryChange = (e) => {
+    var value = this.state.categoryOptions.filter(function (item) {
+      return item.key == e.target.value
+    })
+    this.state.Category = value[0].value;
+    console.info(this.state.Category);
+  }
+
   render() {
     return (
       <Container className="App">
@@ -189,9 +208,14 @@ class Addproduct extends React.Component {
               </Col>
             </FormGroup>
             <FormGroup row>
-              <Label for="Category" sm={2}>Category</Label>
+              <Label for="" sm={2}>Category</Label>
               <Col sm={10}>
-                <Input type="text" name="Category" onChange={this.handleChange} value={this.state.Category} placeholder="Category" />
+                <select className="form-control" onChange={this.categoryChange}>
+                  {this.state.optionsdata.map(function (data, key) {
+                    return (
+                      <option key={key} value={data.key}>{data.value}</option>)
+                  })}
+                </select>
               </Col>
             </FormGroup>
             <FormGroup row>

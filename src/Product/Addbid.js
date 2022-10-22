@@ -10,12 +10,11 @@ let Isvalid;
 
 export const Productlist = (props) => (
     <div className="form-group">
-        <strong>{props.username}</strong>
         <select
             className="form-control"
             name="{props.name}"
             onChange={props.onChange} style={{ float: 'left', paddingRight: '5px', width: '30%' }} >
-            <option defaultValue>Select {props.name}</option>
+            <option defaultValue>Select Product</option>
             {props.options.map((item, index) => (
                 <option key={index} value={item.id}>
                     {item.name}
@@ -56,13 +55,10 @@ class Addbid extends React.Component {
     onChange = (event) => {
         this.state.ProductId = event.target.value;
         this.state.ProductName = event.target.name;
-        console.info(this.state.ProductId);
-        console.info(this.state.ProductName);
     }
 
     Addbid = () => {
-        debugger;
-
+    
         if (this.state.FirstName === "" || this.state.LastName === "" || this.state.Address === "" || this.state.City === "" || this.state.Pin === "" || this.state.Phone === "" || this.state.Email === "" || this.state.ProductId === "" || this.state.BidAmount === "") {
             alert("Please enter all the details");
             Isvalid = false;
@@ -106,8 +102,7 @@ class Addbid extends React.Component {
         else if (this.state.ProductName.length < 5 || this.state.ProductName.length > 30) {
             alert("Product Name Should Have Minimum Length 5 and Maximum Length 30");
             Isvalid = false;
-        }
-
+        }    
         else {
             Isvalid = true;
         }
@@ -156,7 +151,7 @@ class Addbid extends React.Component {
                                 <Productlist
                                     name={this.state.name}
                                     options={this.state.collection}
-                                    onChange={this.onChange} />
+                                    onChange={this.onChange}/>
                             </Col>
                         </FormGroup>
                         <FormGroup row>

@@ -2,6 +2,7 @@ import React from 'react';
 import './Addproduct.css';
 import { Container, Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import Table from './Table';
+let Isvalid;
 
 export const Productlist = (props) => (
   <div className="form-group">
@@ -10,7 +11,7 @@ export const Productlist = (props) => (
       className="form-control"
       name="{props.name}"
       onChange={props.onChange} style={{ float: 'left', paddingRight: '5px', width: '30%' }} >
-      <option defaultValue>Select {props.name}</option>
+      <option defaultValue>Select Product</option>
       {props.options.map((item, index) => (
         <option key={index} value={item.id}>
           {item.name}
@@ -47,17 +48,28 @@ export default class FetchProductDetails extends React.Component {
   }
 
   getProductDetails = () => {
-    fetch(`https://e-auction-api-gate-way.azurewebsites.net/apigateway/e-auction/api/v1/seller/show-bids/${this.state.product}`)
-      .then((response) => response.json())
-      .then((res) => this.setState({
-        ProductName: res.name,
-        ShortDescription: res.shortDescription,
-        DetailedDescription: res.detailedDescription,
-        Category: res.category,
-        StartingPrice: res.startingPrice,
-        BidEndDate: res.bidEndData,
-        Bids: res.bids
-      }))
+  alert(this.state.product);
+    if (this.state.product === '') {
+      alert("Please choose product");
+      Isvalid = false;
+    }
+    else {
+      Isvalid = true;
+    }
+
+    if (Isvalid) {
+      fetch(`https://e-auction-api-gate-way.azurewebsites.net/apigateway/e-auction/api/v1/seller/show-bids/${this.state.product}`)
+        .then((response) => response.json())
+        .then((res) => this.setState({
+          ProductName: res.name,
+          ShortDescription: res.shortDescription,
+          DetailedDescription: res.detailedDescription,
+          Category: res.category,
+          StartingPrice: res.startingPrice,
+          BidEndDate: res.bidEndData,
+          Bids: res.bids
+        }))
+    }
   }
 
   componentDidMount() {
