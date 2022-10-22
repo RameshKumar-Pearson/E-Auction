@@ -125,11 +125,11 @@ class Addproduct extends React.Component {
   }
 
   categoryChange = (e) => {
+    this.state.Category = '';
     var value = this.state.categoryOptions.filter(function (item) {
       return item.key == e.target.value
     })
     this.state.Category = value[0].value;
-    console.info(this.state.Category);
   }
 
   render() {

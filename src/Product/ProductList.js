@@ -79,8 +79,8 @@ export default class FetchProductDetails extends React.Component {
   }
 
   onChange = (event) => {
+    this.state.product='';
     this.state.product = event.target.value;
-    console.info(this.state.product);
   }
 
   render() {

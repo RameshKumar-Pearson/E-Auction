@@ -53,6 +53,8 @@ class Addbid extends React.Component {
     }
 
     onChange = (event) => {
+        this.state.ProductId='';
+        this.state.ProductName='';
         this.state.ProductId = event.target.value;
         this.state.ProductName = event.target.name;
     }
