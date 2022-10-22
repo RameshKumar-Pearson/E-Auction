@@ -19,6 +19,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 This react app deployed in azure web app using react azure app service extension.
 
+Deployment URL : https://e-auction-web-app.azurewebsites.net
+
 ### 'Dependency'
 
 Below API's are should be in running state.
@@ -28,4 +30,5 @@ Seller Api: https://e-auction-seller.azurewebsites.net/swagger/index.html
 Buyer Api : https://e-auction-buyer.azurewebsites.net/swagger/index.html
 
 Api Gateway : https://e-auction-api-gate-way.azurewebsites.net/swagger/index.html
+
 
