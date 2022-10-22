@@ -48,7 +48,7 @@ export default class FetchProductDetails extends React.Component {
   }
 
   getProductDetails = () => {
-  alert(this.state.product);
+  
     if (this.state.product === '') {
       alert("Please choose product");
       Isvalid = false;
