@@ -211,7 +211,7 @@ class Addproduct extends React.Component {
               <Label for="" sm={2}>Category</Label>
               <Col sm={10}>
                 <select className="form-control" onChange={this.categoryChange}>
-                  {this.state.optionsdata.map(function (data, key) {
+                  {this.state.categoryOptions.map(function (data, key) {
                     return (
                       <option key={key} value={data.key}>{data.value}</option>)
                   })}
